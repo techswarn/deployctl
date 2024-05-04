@@ -31,26 +31,26 @@
     - name: Transfer the script
       copy: src=create_cluster.sh dest=/home/ansible mode=0777
 
-    # - name: Execute the script
-    #   command: sh /home/ansible/create_cluster.sh
-- name: Initialize master node.
-  hosts: master
-  user: ansible
-  tasks:
-    - name: Transfer the script
-      copy: src=init_masternode.sh dest=/home/ansible mode=0777
-    # - name: Initize Master node
-    #   command: sh /home/ansible/init_masternode.sh
+    - name: Execute the script
+      command: sh /home/ansible/create_cluster.sh
+# - name: Initialize master node.
+#   hosts: master
+#   user: ansible
+#   tasks:
+#     - name: Transfer the script
+#       copy: src=init_masternode.sh dest=/home/ansible mode=0777
+# - name: Initize Master node
+#   command: sh /home/ansible/init_masternode.sh
 #     # - name: Download file
 #     #   command: ssh -i ~/.ssh/k8deploy -P 2222 root@134.209.154.94/root/init-log.txt .
-- name: Join worker components
-  hosts: workers
-  user: ansible
-  tasks:
-    - name: Transfer the script
-      copy: src=join_workers.sh dest=/home/ansible mode=0777
-    - name: Install CNI plugin and join workers
-      command: sh /home/ansible/join_workers.sh
+# - name: Join worker components
+#   hosts: workers
+#   user: ansible
+#   tasks:
+#     - name: Transfer the script
+#       copy: src=join_workers.sh dest=/home/ansible mode=0777
+#     - name: Install CNI plugin and join workers
+#       command: sh /home/ansible/join_workers.sh
 # - name: Join Clusters
 #   hosts: workers
 #   user: ansible
