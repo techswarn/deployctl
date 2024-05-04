@@ -1,0 +1,6 @@
+[master]
+157.245.102.13 ansible_connection=ssh ansible_user=root ansible_ssh_private_key_file=~/.ssh/k8deploy
+
+[workers]
+128.199.30.21 ansible_connection=ssh ansible_user=root ansible_ssh_private_key_file=~/.ssh/k8deploy
+128.199.28.222 ansible_connection=ssh ansible_user=root ansible_ssh_private_key_file=~/.ssh/k8deploy

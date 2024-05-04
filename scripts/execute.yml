@@ -1,0 +1,59 @@
+---
+- name: debug module demo
+  hosts: all
+  tasks:
+    - name: debug message
+      ansible.builtin.debug:
+        msg: "{{ ansible_version }}"
+        verbosity: 1
+- name: ping module demo
+  hosts: all
+  tasks:
+    - name: test connection
+      ansible.builtin.ping:
+- name: Transfer and execute a script.
+  hosts: all
+  user: ansible
+  tasks:
+    #https://www.baeldung.com/linux/ansible-add-user-password-groupmkpasswd --method=sha-512
+    - name: Add user ansible
+      user:
+        name: ansible
+        shell: /bin/sh
+        createhome: yes # Defaults to yes
+        home: /home/ansible # Defaults to /home/<username>
+
+    - name: Create password for user ansible
+      user:
+        name: ansible
+        password: $y$j9T$jw3An8oM5Rjygvat3TIYa0$O3bHlHRlCGHyNKeuXc7L9U2acLp1E7bgrT1s6DflO/7
+
+    - name: Transfer the script
+      copy: src=create_cluster.sh dest=/home/ansible mode=0777
+
+    # - name: Execute the script
+    #   command: sh /home/ansible/create_cluster.sh
+- name: Initialize master node.
+  hosts: master
+  user: ansible
+  tasks:
+    - name: Transfer the script
+      copy: src=init_masternode.sh dest=/home/ansible mode=0777
+    # - name: Initize Master node
+    #   command: sh /home/ansible/init_masternode.sh
+#     # - name: Download file
+#     #   command: ssh -i ~/.ssh/k8deploy -P 2222 root@134.209.154.94/root/init-log.txt .
+- name: Join worker components
+  hosts: workers
+  user: ansible
+  tasks:
+    - name: Transfer the script
+      copy: src=join_workers.sh dest=/home/ansible mode=0777
+    - name: Install CNI plugin and join workers
+      command: sh /home/ansible/join_workers.sh
+# - name: Join Clusters
+#   hosts: workers
+#   user: ansible
+#   tasks:
+#     - name: Install CNI plugin and join workers
+#       command: kubeadm join 134.209.154.94:6443 --token weh70b.t2bd1vehy0t5zbq3 --discovery-token-ca-cert-hash sha256:4a6df3d458584686f125962687a441c5b623ede8d6b0e144fdcc83b7b14f8c99
