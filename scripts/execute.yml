@@ -31,29 +31,39 @@
     - name: Transfer the script
       copy: src=create_cluster.sh dest=/home/ansible mode=0777
 
-    # - name: Execute the script
-    #   command: sh /home/ansible/create_cluster.sh
+    - name: Execute the script
+      command: sh /home/ansible/create_cluster.sh
 - name: Initialize master node.
   hosts: master
   user: ansible
   tasks:
     - name: Transfer the script
       copy: src=init_masternode.sh dest=/home/ansible mode=0777
-    # - name: Initize Master node
-    #   command: sh /home/ansible/init_masternode.sh
-#     # - name: Download file
-#     #   command: ssh -i ~/.ssh/k8deploy -P 2222 root@134.209.154.94/root/init-log.txt .
+    - name: Initize Master node
+      command: sh /home/ansible/init_masternode.sh
+    - fetch:
+        src: /home/ansible/init-log.txt
+        dest: ./init-log.txt
+        flat: true
+
 - name: Join worker components
   hosts: workers
   user: ansible
   tasks:
+    - copy:
+        src: ./init-log.txt
+        dest: /home/ansible/init-log.txt
     - name: Transfer the script
       copy: src=join_workers.sh dest=/home/ansible mode=0777
-    - name: Install CNI plugin and join workers
+    - name: Join workers
       command: sh /home/ansible/join_workers.sh
-# - name: Join Clusters
-#   hosts: workers
-#   user: ansible
-#   tasks:
-#     - name: Install CNI plugin and join workers
-#       command: kubeadm join 134.209.154.94:6443 --token weh70b.t2bd1vehy0t5zbq3 --discovery-token-ca-cert-hash sha256:4a6df3d458584686f125962687a441c5b623ede8d6b0e144fdcc83b7b14f8c99
+    - name: Transfer the script
+      copy: src=pod-network.shh dest=/home/ansible mode=0777
+- name: Install CNI
+  hosts: master
+  user: ansible
+  tasks:
+    - name: Transfer the script
+      copy: src=pod-network.sh dest=/home/ansible mode=0777
+    - name: Install CNI
+      command: sh /home/ansible/pod-network.sh

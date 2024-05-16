@@ -1,0 +1,7 @@
+$(echo Hello)
+$(whoami)
+$PWD
+
+https://medium.com/@tech_18484/kubernetes-bootstrap-master-node-24b2525afe0b
+https://gist.github.com/jtyr/de0a93adf1ae7fccf7c4fcad1956f093
+https://github.com/abousselmi/k8s-kind

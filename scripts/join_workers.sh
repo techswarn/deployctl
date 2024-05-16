@@ -1,6 +1,10 @@
 #!/bin/bash
 
-kubeadm join 157.245.102.13:6443 --token kxemso.m9i3b3fhzcepnj85 \
-	--discovery-token-ca-cert-hash sha256:e7ac73d583ba476d3ccc8394a36a94472d283bad4388c4f126db4156d4270b6c 
+cd /home/ansible
+
+
+nodejoin=$(grep -A1 'kubeadm join' init-log.txt | sed -r -e 's/ \\//' -e 's/^\s+/ /' | xargs)
+echo "$nodejoin --ignore-preflight-errors=all"
+eval "$nodejoin" 
 
 exit 0

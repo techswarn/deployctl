@@ -10,6 +10,22 @@ WORKER1='139.59.94.245'
 WORKER2='139.59.94.198'
 
 
+####print color####
+function print_color(){
+
+ NC='\033[0m'
+ case $1 in
+    "green") COLOR='\033[0;32m' ;;
+    "red") COLOR='\033[0;31m' ;;
+    "*") COLOR='\033[0m' ;;
+  esac
+
+  echo -e "${COLOR}$2 ${NC}"
+}
+
+print_color green "\n----------------------------------Script starting... wait\n"
+
+
 IP="$(ip route get 1 | awk '{print $(NF-2);exit}')"
 
 echo ${IP}
