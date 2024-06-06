@@ -1,0 +1,21 @@
+# Define the base image
+FROM ubuntu:22.04
+
+# Install packages that we want to make available at run time
+RUN apt-get update && \
+  apt-get install -y xz-utils ca-certificates && \
+  rm -rf /var/lib/apt/lists/* 
+
+# Create user and group
+ARG cnb_uid=1000
+ARG cnb_gid=1000
+ARG stack_id=heroku-22
+RUN groupadd appship --gid ${cnb_gid} && useradd appship -u ${cnb_uid} -g ${cnb_gid} -s /bin/bash -m
+
+# Set user and group
+USER ${cnb_uid}:${cnb_gid}
+
+# Set required CNB target information
+LABEL io.buildpacks.stack.id=${stack_id}
+LABEL io.buildpacks.base.distro.name="sample-run"
+LABEL io.buildpacks.base.distro.version="latest"

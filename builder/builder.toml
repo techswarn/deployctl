@@ -1,0 +1,181 @@
+# Stack (deprecated) used to create the builder
+[stack]
+id = "heroku-22"
+# This image is used at runtime
+run-image = "cnbs/sample-base-run:jammy"
+# This image is used at build-time
+build-image = "cnbs/sample-base-build:jammy"
+
+[lifecycle]
+version = "0.6.1"
+
+# Buildpacks to include in builder
+
+[[buildpacks]]
+  id = "heroku/maven"
+  uri = "https://github.com/heroku/heroku-buildpack-java/releases/download/cnb/heroku-buildpack-maven.tgz"
+
+[[buildpacks]]
+  id = "heroku/jvm"
+  uri = "https://github.com/heroku/heroku-buildpack-jvm-common/releases/download/v96/heroku-jvm-cnb.tgz"
+
+[[buildpacks]]
+  id = "heroku/ruby"
+  uri = "https://github.com/heroku/heroku-buildpack-ruby/releases/download/cnb-alpha/ruby-buildpack-vCNB-alpha.tgz"
+
+[[buildpacks]]
+  id = "heroku/procfile"
+  uri = "https://github.com/heroku/procfile-cnb/releases/download/v0.5/procfile-cnb-v0.5.tgz"
+
+[[buildpacks]]
+  id = "heroku/python"
+  uri = "buildpacks/python"
+
+[[buildpacks]]
+  id = "heroku/gradle"
+  uri = "buildpacks/gradle"
+
+[[buildpacks]]
+  id = "heroku/scala"
+  uri = "buildpacks/scala"
+
+[[buildpacks]]
+  id = "heroku/php"
+  uri = "buildpacks/php"
+
+[[buildpacks]]
+  id = "heroku/go"
+  uri = "buildpacks/go"
+
+[[buildpacks]]
+id = "heroku/buildpacks-nodejs"
+uri = "https://github.com/heroku/buildpacks-nodejs/archive/refs/tags/v2.0.0.tar.gz"
+
+[[buildpacks]]
+  id = "heroku/nodejs-engine-buildpack"
+  uri = "https://github.com/heroku/nodejs-engine-buildpack/releases/download/v0.3.0/nodejs-engine-buildpack-v0.3.0.tgz"
+
+[[buildpacks]]
+  id = "heroku/nodejs-npm-buildpack"
+  uri = "https://github.com/heroku/nodejs-npm-buildpack/releases/download/v0.1.2/nodejs-npm-buildpack-v0.1.2.tgz"
+
+[[buildpacks]]
+  id = "heroku/nodejs-yarn"
+  uri = "https://github.com/heroku/nodejs-yarn-buildpack/releases/download/v0.0.1/nodejs-yarn-buildpack-v0.0.1.tgz"
+
+
+[[order]]
+  [[order.group]]
+    id = "heroku/ruby"
+    version = "0.0.1"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/python"
+    version = "0.0.5.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/jvm"
+    version = "0.1"
+
+  [[order.group]]
+    id = "heroku/maven"
+    version = "0.1"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/gradle"
+    version = "0.0.5.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/scala"
+    version = "0.0.5.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/php"
+    version = "0.0.5.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/go"
+    version = "0.0.5.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/buildpacks-nodejs"
+    version = "2.0.0"
+
+  [[order.group]]
+    id = "heroku/nodejs-npm-buildpack"
+    version = "0.1.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/nodejs-engine-buildpack"
+    version = "0.3.0"
+
+  [[order.group]]
+    id = "heroku/nodejs-yarn"
+    version = "0.0.1"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
+
+[[order]]
+  [[order.group]]
+    id = "heroku/nodejs-engine-buildpack"
+    version = "0.3.0"
+
+  [[order.group]]
+    id = "heroku/nodejs-npm-buildpack"
+    version = "0.1.2"
+
+  [[order.group]]
+    id = "heroku/procfile"
+    version = "0.5"
+    optional = true
