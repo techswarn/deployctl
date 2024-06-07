@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: retrieve-source
-          image: swarntech/appship:jammy
+          image: swarntech/appship-builder
           command: ["git"]
           args: ["clone", "https://github.com/techswarn/backend.git", "/workspace"]
           volumeMounts:
@@ -15,12 +15,12 @@ spec:
               name: source
       containers:
         - name: build
-          image: swarntech/appship:jammy
+          image: swarntech/appship-builder
           env:
             - name: DOCKERFILE_PATH
               value: Dockerfile
             - name: APP_IMAGE_URL
-              value: swarntech/angular:latest
+              value: swarntech/go-backend-1:latest
           volumeMounts:
             - mountPath: /workspace
               name: source
