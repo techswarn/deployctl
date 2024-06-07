@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 # Install packages that we want to make available at build time
 RUN apt-get update && \
   apt-get install -y xz-utils ca-certificates && \
-  rm -rf /var/lib/apt/lists/* 
+  rm -rf /var/lib/apt/lists/*
 # Set required CNB user information
 ARG cnb_uid=1000
 ARG cnb_gid=1000

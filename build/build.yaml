@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: retrieve-source
+          image: swarntech/appship:jammy
+          command: ["git"]
+          args: ["clone", "https://github.com/techswarn/backend.git", "/workspace"]
+          volumeMounts:
+            - mountPath: /workspace
+              name: source
+      containers:
+        - name: build
+          image: swarntech/appship:jammy
+          env:
+            - name: DOCKERFILE_PATH
+              value: Dockerfile
+            - name: APP_IMAGE_URL
+              value: swarntech/angular:latest
+          volumeMounts:
+            - mountPath: /workspace
+              name: source
+            - mountPath: /etc/docker
+              name: docker-config
+      restartPolicy: Never
+      volumes:
+        - name: source
+          emptyDir: {}
+        - name: docker-config
+          projected:
+            sources:
+              - secret:
+                  name: docker-user-pass
+                  items:
+                    - key: .dockerconfigjson
+                      path: config.json

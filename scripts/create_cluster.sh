@@ -25,11 +25,10 @@ function print_color(){
 
 print_color green "\n----------------------------------Script starting... wait\n"
 
-
-IP="$(ip route get 1 | awk '{print $(NF-2);exit}')"
-
-echo ${IP}
-
+{
+  PRIMARY_IP="$(ip route get 1 | awk '{print $(NF-2);exit}')"
+  echo ${PRIMARY_IP}
+}
 #open port 6443
 ufw allow 6443/tcp
 nc 127.0.0.1 6443 -v
