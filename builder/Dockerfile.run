@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 # Install packages that we want to make available at run time
 RUN apt-get update && \
-  apt-get install -y xz-utils ca-certificates && \
+  apt-get install -y xz-utils ca-certificates git && \
   rm -rf /var/lib/apt/lists/* 
 
 # Create user and group

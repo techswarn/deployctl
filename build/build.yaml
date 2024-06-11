@@ -7,22 +7,22 @@ spec:
     spec:
       initContainers:
         - name: retrieve-source
-          image: swarntech/appship-builder
+          image: swarntech/appship-builder:latest
           command: ["git"]
-          args: ["clone", "https://github.com/techswarn/backend.git", "/workspace"]
+          args: ["clone", "https://github.com/techswarn/titan.git", "/workspace"]
           volumeMounts:
             - mountPath: /workspace
               name: source
       containers:
         - name: build
-          image: swarntech/appship-builder
+          image: swarntech/appship-builder:latest
           env:
             - name: DOCKERFILE_PATH
               value: Dockerfile
             - name: APP_IMAGE_URL
               value: swarntech/go-backend-1:latest
             - name: CNB_PLATFORM_API
-              value: "0.13"
+              value: "0.19.6"
             - name: CNB_APP_DIR
               value: workspace
           volumeMounts:

@@ -19,11 +19,6 @@ uri = "samples/buildpacks/heroku-buildpack-go-189"
 [[buildpacks]]
 uri = "samples/buildpacks/heroku-buildpack-python-242"
 
-[[buildpacks]]
-# Packaged buildpacks to include in builder;
-# the "hello-universe" package contains the "hello-world" and "hello-moon" buildpacks
-uri = "docker://cnbs/sample-package:hello-universe"
-
 # Order used for detection
 
 [[order]]
@@ -34,19 +29,4 @@ uri = "docker://cnbs/sample-package:hello-universe"
 [[order]]
     [[order.group]]
     id = "heroku/python"
-    version = "0.0.1"
-
-[[order]]
-    [[order.group]]
-    id = "samples/hello-world"
-    version = "0.0.1"
-
-    # This buildpack will display build-time information (as a dependant)
-    [[order.group]]
-    id = "samples/hello-moon"
-    version = "0.0.1"
-
-    # This buildpack will create a process type "sys-info" to display runtime information
-    [[order.group]]
-    id = "samples/hello-processes"
     version = "0.0.1"
