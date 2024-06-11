@@ -12,10 +12,11 @@ ARG cnb_gid=1000
 ARG stack_id=heroku-22
 RUN groupadd appship --gid ${cnb_gid} && useradd appship -u ${cnb_uid} -g ${cnb_gid} -s /bin/bash -m
 
-# Set user and group
-USER ${cnb_uid}:${cnb_gid}
 
 # Set required CNB target information
 LABEL io.buildpacks.stack.id=${stack_id}
 LABEL io.buildpacks.base.distro.name="sample-run"
 LABEL io.buildpacks.base.distro.version="latest"
+
+USER appship
+ENV HOME /workspace

@@ -18,6 +18,10 @@ RUN groupadd appship --gid ${CNB_GROUP_ID} && useradd appship -u ${cnb_uid} -g $
 # Set user and group
 USER ${CNB_USER_ID}:${CNB_GROUP_ID}
 
+ENV CNB_USER_ID=${cnb_uid}
+ENV CNB_GROUP_ID=${cnb_gid}
+ENV CNB_STACK_ID=${stack_id}
+
 # Set required CNB target information
 LABEL io.buildpacks.stack.id=${stack_id}
 LABEL io.buildpacks.base.distro.name="sample"

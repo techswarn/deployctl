@@ -1,10 +1,10 @@
 # Stack (deprecated) used to create the builder
 [stack]
-id = "io.buildpacks.samples.stacks.jammy"
+id = "heroku-22"
 # This image is used at runtime
-run-image = "cnbs/sample-base-run:jammy"
+run-image = "swarntech/appship-run:ubuntu-22"
 # This image is used at build-time
-build-image = "cnbs/sample-base-build:jammy"
+build-image = "swarntech/appship-build:ubuntu-22"
 
 [lifecycle]
 version = "0.19.6"
@@ -17,6 +17,9 @@ uri = "samples/buildpacks/hello-processes"
 uri = "samples/buildpacks/heroku-buildpack-go-189"
 
 [[buildpacks]]
+uri = "samples/buildpacks/heroku-buildpack-python-242"
+
+[[buildpacks]]
 # Packaged buildpacks to include in builder;
 # the "hello-universe" package contains the "hello-world" and "hello-moon" buildpacks
 uri = "docker://cnbs/sample-package:hello-universe"
@@ -26,6 +29,11 @@ uri = "docker://cnbs/sample-package:hello-universe"
 [[order]]
     [[order.group]]
     id = "heroku/go"
+    version = "0.0.1"
+
+[[order]]
+    [[order.group]]
+    id = "heroku/python"
     version = "0.0.1"
 
 [[order]]

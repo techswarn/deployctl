@@ -2,10 +2,16 @@
 
 set -e
 set -x
+echo $(cut -d: -f1 /etc/passwd)
 
-chown -R appsail:appsail /workspace
-su - appsail
+#chown -R appship:appship /workspace
+#su - appship
+echo "----------DEBUGING------------- "\n
+DIR=$(pwd)
+echo ${DIR}
 
+echo "${CNB_APP_DIR}"
+echo "----------DEBUGING------------- "\n
 cd /layers
 
 /cnb/lifecycle/detector

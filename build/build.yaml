@@ -21,6 +21,10 @@ spec:
               value: Dockerfile
             - name: APP_IMAGE_URL
               value: swarntech/go-backend-1:latest
+            - name: CNB_PLATFORM_API
+              value: "0.13"
+            - name: CNB_APP_DIR
+              value: workspace
           volumeMounts:
             - mountPath: /workspace
               name: source

@@ -1,9 +1,4 @@
-FROM gcr.io/kaniko-project/executor:v0.17.1 AS kaniko
-
-FROM nanzhong/appsail-buildpacks:ubuntu-18
-
-COPY --from=kaniko /kaniko /kaniko
-ENV PATH="${PATH}:/kaniko"
+FROM swarntech/appship-buildpacks:ubuntu-22
 
 COPY bin/build.sh /bin/build.sh
 COPY bin/build-kaniko.sh /bin/build-kaniko.sh

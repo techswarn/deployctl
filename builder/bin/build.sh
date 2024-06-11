@@ -19,7 +19,9 @@ echo "DOCKERFILE_PATH: $DOCKERFILE_PATH"
 
 if [[ -f "/workspace/$DOCKERFILE_PATH" ]]; then
     echo "Building image with kaniko..."
-    /bin/build-kaniko.sh
+#    /bin/build-kaniko.sh
+#    Temporary hack added
+    /bin/build-buildpacks.sh
 else
     echo "Building image with buildpacks..."
     /bin/build-buildpacks.sh
