@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: retrieve-source
-          image: swarntech/appship-builder:latest
+          image: alpine/git
           command: ["git"]
           args: ["clone", "https://github.com/techswarn/titan.git", "/workspace"]
           volumeMounts:
@@ -20,7 +20,7 @@ spec:
             - name: DOCKERFILE_PATH
               value: Dockerfile
             - name: APP_IMAGE_URL
-              value: swarntech/go-backend-1:latest
+              value: swarntech/go-backend:latest
             - name: CNB_PLATFORM_API
               value: "0.19.6"
             - name: CNB_APP_DIR
