@@ -9,10 +9,6 @@ build-image = "swarntech/appship-build:ubuntu-22"
 [lifecycle]
 version = "0.19.6"
 
-# Buildpacks to include in builder
-[[buildpacks]]
-uri = "samples/buildpacks/hello-processes"
-
 [[buildpacks]]
 uri = "samples/buildpacks/heroku-buildpack-go-189"
 

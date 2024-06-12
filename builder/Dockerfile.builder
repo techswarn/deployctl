@@ -4,4 +4,6 @@ COPY bin/build.sh /bin/build.sh
 COPY bin/build-kaniko.sh /bin/build-kaniko.sh
 COPY bin/build-buildpacks.sh /bin/build-buildpacks.sh
 
+RUN sudo chmod +x /bin/*
+
 ENTRYPOINT ["/bin/build.sh"]
